@@ -1,0 +1,12 @@
+{
+  "name": "store-product",
+  "version": "1.0.0",
+  "description": "A Stor-Product for the best way to start from here ",
+  "license": "ISC",
+  "author": "Saurav kosti",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
