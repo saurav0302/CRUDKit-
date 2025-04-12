@@ -2,6 +2,7 @@ import AsyncHandler from "../utils/AsyncHandler.js";
 import ApiError from "../utils/ApiError.js";
 import ApiResponse from "../utils/ApiResponse.js";
 import { Product } from "../models/product.model.js";
+import mongoose, { mongo } from "mongoose";
 
 // create-product
 const createProduct = AsyncHandler(async (req, res, next) => {
@@ -36,6 +37,11 @@ const updateProduct = AsyncHandler(async (req, res, next) => {
     const { id } = req.params;
     const { name, price, image } = req.body;
 
+    if(mongoose.Types.ObjectId.isValid(id) === false) {
+        throw new ApiError("Product id is not valid", 400);
+
+    }
+
     if (!name && !price && !image) {
         throw new ApiError("At least one field is required", 400);
     }
@@ -56,6 +62,11 @@ const deleteProduct = AsyncHandler(async (req, res, next) => {
 
     if (!id) {
        throw new ApiError("Product id is required", 400);
+    }
+
+    if(mongoose.Types.ObjectId.isValid(id) === false) {
+        throw new ApiError("Product id is not valid", 400);
+
     }
 
     const product = await Product.findByIdAndDelete(id);
