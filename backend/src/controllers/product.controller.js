@@ -75,7 +75,7 @@ const deleteProduct = AsyncHandler(async (req, res, next) => {
         throw new ApiError("Product not deleted", 400);
     }
 
-    return res.status(200).json(new ApiResponse(200, "Product deleted" , product = {name: product.name, price: product.price}));
+    return res.status(200).json(new ApiResponse(200, "Product deleted" , {name: product.name, price: product.price}));
 });
 
 export { createProduct, getAllProduct, updateProduct, deleteProduct };
