@@ -1,8 +1,14 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import ApiError from './utils/ApiError.js';
+import Cors from 'cors';
 
 const app = express();
+
+app.use(Cors({
+  origin: process.env.CLIENT_URL,
+  credentials: true
+}))
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

@@ -7,7 +7,7 @@ export const useProductStore = create((set) => ({
 		if (!newProduct.name || !newProduct.image || !newProduct.price) {
 			return { success: false, message: "Please fill in all fields." };
 		}
-		const res = await fetch("/api/v1/products/create-product", {
+		const res = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/products/create-product`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -19,12 +19,12 @@ export const useProductStore = create((set) => ({
 		return { success: true, message: "Product created successfully" };
 	},
 	fetchProducts: async () => {
-		const res = await fetch("/api/v1/products/get-all-product");
+		const res = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/products/get-all-product`);
 		const data = await res.json();
 		set({ products: data.data });
 	},
 	deleteProduct: async (pid) => {
-		const res = await fetch(`/api/v1/products/delete-product/${pid}`, {
+		const res = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/products/delete-product/${pid}`, {
 			method: "DELETE",
 		});
 		const data = await res.json();
@@ -35,7 +35,7 @@ export const useProductStore = create((set) => ({
 		return { success: true, message: data.message };
 	},
 	updateProduct: async (pid, updatedProduct) => {
-		const res = await fetch(`/api/v1/products/update-product/${pid}`, {
+		const res = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/products/update-product/${pid}`, {
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",
